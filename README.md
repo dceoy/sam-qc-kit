@@ -1,2 +1,4 @@
-# samspect
-Quality control tool for SAM/BAM/CRAM files
+samspect
+========
+
+Quality Control Tools for BAM/CRAM Files

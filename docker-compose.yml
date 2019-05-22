@@ -1,0 +1,27 @@
+---
+version: '3'
+
+services:
+  samtools:
+    image: dceoy/samtools:latest
+    volumes:
+      - ./bin:/opt/bin
+      - ./in:/in:ro
+      - ${PWD}:/wd
+    working_dir: /wd
+    entrypoint:
+      - /opt/bin/samspect.sh
+    command:
+      - /in
+  igv-webapp:
+    image: dceoy/igv-webapp:latest
+    volumes:
+      - ${PWD}:/wd:ro
+    working_dir: /wd
+    ports:
+      - 8080:8080
+    entrypoint:
+      - npm
+    command:
+      - start
+      - --prefix=/usr/local/src/igv-webapp
