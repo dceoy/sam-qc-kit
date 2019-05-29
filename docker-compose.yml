@@ -2,18 +2,8 @@
 version: '3'
 
 services:
-  samtools:
-    image: dceoy/samtools:latest
-    volumes:
-      - ./bin:/opt/bin
-      - ./in:/in:ro
-      - ${PWD}:/wd
-    working_dir: /wd
-    entrypoint:
-      - /opt/bin/samspect.sh
-    command:
-      - /in
   igv-webapp:
+    container_name: igv-webapp
     image: dceoy/igv-webapp:latest
     volumes:
       - ${PWD}:/wd:ro
@@ -25,3 +15,14 @@ services:
     command:
       - start
       - --prefix=/usr/local/src/igv-webapp
+  samtools-qc:
+    container_name: samtools-qc
+    image: dceoy/samtools:latest
+    volumes:
+      - ./bin:/opt/bin
+      - ${PWD}:/wd
+    working_dir: /wd
+    entrypoint:
+      - /opt/bin/samtools_qc.sh
+    command:
+      - --version
