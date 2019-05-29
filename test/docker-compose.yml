@@ -15,8 +15,8 @@ services:
     command:
       - start
       - --prefix=/usr/local/src/igv-webapp
-  samtools-qc:
-    container_name: samtools-qc
+  test-samtools-qc:
+    container_name: test-samtools-qc
     image: dceoy/samtools:latest
     volumes:
       - ..:/repo_root

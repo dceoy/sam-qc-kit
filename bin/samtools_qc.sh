@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Tiny and portable bash script as a shell command
+# Quality control checker for SAM/BAM/CRAM files
 #
 # Usage:
 #   samtools_qc.sh [--debug] [--cpus=<int>] <in_dir> <out_dir>
@@ -89,7 +89,7 @@ while [[ ${#} -ge 1 ]]; do
   esac
 done
 
-[[ ${#MAIN_ARGS[@]} -eq 2 ]] || print_usage | abort -
+[[ ${#MAIN_ARGS[@]} -eq 2 ]] || abort "invalid number of arguments: ${MAIN_ARGS[*]}"
 IN_DIR="${MAIN_ARGS[0]}"
 OUT_DIR="${MAIN_ARGS[1]}"
 
