@@ -15,11 +15,14 @@ TEST_STAT_DIR="${TEST_WORK_DIR}/stat"
 mkdir -p "${TEST_SAM_DIR}"
 mkdir -p "${TEST_STAT_DIR}"
 
-cd "${TEST_SAM_DIR}"
+WD="${PWD}" && cd "${TEST_SAM_DIR}"
 curl -sSO https://raw.githubusercontent.com/samtools/samtools/develop/examples/toy.sam
 curl -sSO https://raw.githubusercontent.com/samtools/samtools/develop/examples/toy.fa
 samtools view -bS -o toy.bam toy.sam
 samtools view -CS -T toy.fa -o toy.cram toy.sam
-cd -
+samtools index toy.bam
+samtools index toy.cram
+samtools faidx toy.fa
+cd "${WD}"
 
 ${SAMTOOLS_QC_SH} "${TEST_SAM_DIR}" "${TEST_STAT_DIR}"

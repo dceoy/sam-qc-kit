@@ -1,0 +1,28 @@
+---
+version: '3'
+
+services:
+  igv-webapp:
+    container_name: igv-webapp
+    image: dceoy/igv-webapp:latest
+    volumes:
+      - .:/wd:ro
+    working_dir: /wd
+    ports:
+      - 8080:8080
+    entrypoint:
+      - npm
+    command:
+      - start
+      - --prefix=/usr/local/src/igv-webapp
+  samtools-qc:
+    container_name: samtools-qc
+    image: dceoy/samtools:latest
+    volumes:
+      - ..:/repo_root
+    working_dir: /repo_root
+    entrypoint:
+      - /bin/bash
+      - -c
+    command:
+      - ./test/test_samtools_qc.sh
